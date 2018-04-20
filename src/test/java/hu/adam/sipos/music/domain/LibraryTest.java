@@ -2,28 +2,38 @@ package hu.adam.sipos.music.domain;
 
 import org.junit.Assert;
 import org.junit.Test;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
 
-
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 public class LibraryTest {
+    private Library library = new Library();
     @Test
     public void shouldCreateAnEmptyLibrary() {
-        Library library = new Library();
         Assert.assertNotNull(library);
     }
 
     @Test
-    public void newLibraryHasEmptyAlbumList() {
-        Library library = new Library();
-        List<Album> albums = library.getAlbums();
-        Assert.assertEquals(0,albums.size());
+    public void newLibraryHasEmptyArtistList() {
+        List<Artist> artists = library.getArtists();
+        Assert.assertTrue(artists.isEmpty());
 
     }
 
     @Test
+    public void addAnArtistToTheLibraryLibraryHasAnArtist() {
+        List<Artist> myArtists = new ArrayList<>();
+        myArtists.add(new Artist("Metallica"));
+        library.setArtists(myArtists);
+        Assert.assertFalse(library.getArtists().isEmpty());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void creatingArtistWithNullNameShouldResultIllegalArgumentException() {
+        new Artist(null);
+
+
+    }
+    /*    @Test
     public void addingAlbumsToTheEmptyAlbumList() {
         Library library = new Library();
         library.addEmptyAlbumToLibrary();
@@ -70,5 +80,5 @@ public class LibraryTest {
         List<Track> tracks = album.getTracks();
         Assert.assertEquals(0,tracks.size());
 
-    }
+    }*/
 }
