@@ -10,6 +10,7 @@ public class Album {
     private String genre;
     private String firstReleaseDate;
     private String nameOfCoStars;
+    private List<Track> tracks = new ArrayList<>();
 
 
 
@@ -17,16 +18,23 @@ public class Album {
         if(titleOfAlbum == null) {
             throw new IllegalArgumentException("You must specify a title for the album!");
         }
+        else{
+            this.titleOfAlbum = titleOfAlbum;
+        }
         if(DateVerifier(firstReleaseDate)){
             this.firstReleaseDate = firstReleaseDate;
         }
         else{
             throw new IllegalArgumentException("The format of the date is illegal. The firstReleaseDate must be yyyy.mm.dd format");
         }
-        this.titleOfAlbum = titleOfAlbum;
-        this.genre = genre;
 
-        this.nameOfCoStars = nameOfCoStars;
+        this.genre = genre;
+        if(nameOfCoStars ==null){
+            this.nameOfCoStars = nameOfCoStars;
+        }
+        else if (nameOfCoStars.length() == 0){
+            throw new IllegalArgumentException("If there are no CoStars, nameOfCoStars should be null!");
+        }
 
 
     }
@@ -34,30 +42,7 @@ public class Album {
         return firstReleaseDate.matches("([12]\\d{3}\\.(0[1-9]|1[0-2])\\.(0[1-9]|[12]\\d|3[01]))");
     }
 
-
-    public String getTitleOfAlbum() {
-        return titleOfAlbum;
+    public List<Track> getTracks() {
+        return tracks;
     }
-
-
-
-    public String getGenre() {
-        return genre;
-    }
-
-
-
-    public String getFirstReleaseDate() {
-        return firstReleaseDate;
-    }
-
-
-
-    public String getNameOfCoStars() {
-        return nameOfCoStars;
-    }
-
-
-
-
 }

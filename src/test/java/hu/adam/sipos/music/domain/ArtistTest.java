@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 public class ArtistTest {
@@ -33,7 +32,7 @@ public class ArtistTest {
        myArtists.add(new Artist("Metallica"));
        library.setArtists(myArtists);
        List<Album> myAlbums = new ArrayList<>();
-       myAlbums.add(new Album("Master of Puppets","rock","1986.03.03",""));
+       myAlbums.add(new Album("Master of Puppets","rock","1986.03.03",null));
        library.getArtists().get(0).setAlbums(myAlbums);
        List<Album> albums = library.getArtists().get(0).getAlbums();
        Assert.assertFalse(albums.isEmpty());
@@ -43,11 +42,15 @@ public class ArtistTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void creatingAnAlbumWithNullAlbumTitleShouldResultIllegalArgumentException() {
-        new Album(null,"rock","1986.03.03","");
+        new Album(null,"rock","1986.03.03",null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void creatingAnAlbumWithIllegalFirstReleaseDateFormatShouldResultIllegalArgumentException(){
-        new Album("Master of Puppets","rock","03.03.1986","");
+        new Album("Master of Puppets","rock","03.03.1986",null);
+    }
+    @Test (expected = IllegalArgumentException.class)
+    public void creatingAnAlbumWithZeroLengthStringAsNameOfCoStarsShouldResultIllegalArgumentException(){
+        new Album("Master of Puppets","rock","1986.03.03","");
     }
 }
