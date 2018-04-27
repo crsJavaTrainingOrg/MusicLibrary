@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
-    private List<Artist> artists = new ArrayList<>();
+    public  List<Artist> artists = new ArrayList<>();
 
     public List<Artist> getArtists() {
         return artists;
@@ -13,4 +13,5 @@ public class Library {
     public void setArtists(List<Artist> artists) {
         this.artists = artists;
     }
+
 }

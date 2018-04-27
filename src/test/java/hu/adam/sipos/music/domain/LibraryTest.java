@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.List;
 public class LibraryTest {
     private Library library = new Library();
@@ -33,6 +34,9 @@ public class LibraryTest {
 
 
     }
+
+
+
     /*    @Test
     public void addingAlbumsToTheEmptyAlbumList() {
         Library library = new Library();
