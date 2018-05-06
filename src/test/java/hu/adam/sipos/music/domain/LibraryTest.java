@@ -26,6 +26,7 @@ public class LibraryTest {
         myArtists.add(new Artist("Metallica"));
         library.setArtists(myArtists);
         Assert.assertFalse(library.getArtists().isEmpty());
+        Assert.assertEquals("Metallica",library.getArtists().get(0).getName());
     }
 
     @Test(expected = IllegalArgumentException.class)

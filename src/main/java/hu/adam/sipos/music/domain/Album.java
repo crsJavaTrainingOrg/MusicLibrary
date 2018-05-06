@@ -1,9 +1,8 @@
 package hu.adam.sipos.music.domain;
 
+
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class Album {
     private String titleOfAlbum;
@@ -11,7 +10,6 @@ public class Album {
     private String firstReleaseDate;
     private String nameOfCoStars;
     private List<Track> tracks = new ArrayList<>();
-
 
 
     public Album(String titleOfAlbum,  String genre, String firstReleaseDate, String nameOfCoStars) {
@@ -42,7 +40,42 @@ public class Album {
         return firstReleaseDate.matches("([12]\\d{3}\\.(0[1-9]|1[0-2])\\.(0[1-9]|[12]\\d|3[01]))");
     }
 
+
+    public String getTitleOfAlbum() {
+        return titleOfAlbum;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getFirstReleaseDate() {
+        return firstReleaseDate;
+    }
+
+    public String getNameOfCoStars() {
+        return nameOfCoStars;
+    }
+
     public List<Track> getTracks() {
         return tracks;
+    }
+
+    public void setTracks(List<Track> tracks) {
+        this.tracks = tracks;
+    }
+
+    public void deleteTrack(String titleOfTrackToDelete) {
+        tracks.removeIf(track->track.getTrackTitle().equals(titleOfTrackToDelete));
+    }
+
+    public Track searchTracks(String titleOfSearchedTrack) {
+        for(Track t: tracks){
+            if(t.getTrackTitle().equals(titleOfSearchedTrack)){
+                return t;
+            }
+        }
+        System.out.println("There is no track with the title:"+titleOfSearchedTrack);
+        return null;
     }
 }

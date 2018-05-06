@@ -22,4 +22,21 @@ public class Artist {
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void deleteAlbumWithCertainName(String titleOfAlbumToDelete) {
+        albums.removeIf(album -> album.getTitleOfAlbum().equals(titleOfAlbumToDelete));
+    }
+
+    public Album search(String titleOfSearchedAlbum) {
+        for(Album a: albums){
+            if(a.getTitleOfAlbum().equals(titleOfSearchedAlbum)){
+                return a;
+            }
+        }
+        return null;
+    }
 }
