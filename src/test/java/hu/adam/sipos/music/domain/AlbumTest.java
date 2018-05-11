@@ -25,19 +25,19 @@ public class AlbumTest {
     @Test
     public void addingATrackToTrackListAlbumHasTrackInTrackList() {
         List<Track> tracks = new ArrayList<>();
-        tracks.add(new Track("Battery","5:12",1,false));
+        tracks.add(new Track("Battery","05:12",false));
         masterOfPuppets.setTracks(tracks);
         Assert.assertFalse(masterOfPuppets.getTracks().isEmpty());
         Assert.assertEquals("Battery",masterOfPuppets.getTracks().get(0).getTrackTitle());
-        Assert.assertEquals("5:12",masterOfPuppets.getTracks().get(0).getTrackLength());
-        Assert.assertEquals(1,masterOfPuppets.getTracks().get(0).getNumberOfTrack());
+        Assert.assertEquals(312,masterOfPuppets.getTracks().get(0).getTrackLength());
         Assert.assertEquals(false,masterOfPuppets.getTracks().get(0).isExplicitContent());
+        Assert.assertEquals("05:12",masterOfPuppets.getTracks().get(0).getTrackLengthString());
     }
 
     @Test
     public void deletingTrackOfAnAlbumTrackIsNoLongerInAlbum() {
         List<Track> tracks = new ArrayList<>();
-        tracks.add(new Track("Battery","5:12",1,false));
+        tracks.add(new Track("Battery","05:12",false));
         masterOfPuppets.setTracks(tracks);
         masterOfPuppets.deleteTrack("Battery");
         Assert.assertFalse(masterOfPuppets.getTracks().stream().anyMatch(item->item.getTrackTitle().equals("Battery")));
@@ -47,7 +47,7 @@ public class AlbumTest {
     @Test
     public void searchingForATrackWithACertainTitleReturnsTheSearchedTrack() {
         List <Track> tracks = new ArrayList<>();
-        Track battery = new Track("Battery","5:12",1,false);
+        Track battery = new Track("Battery",312,false);
         tracks.add(battery);
         masterOfPuppets.setTracks(tracks);
         Assert.assertEquals(battery,masterOfPuppets.searchTracks("Battery"));
