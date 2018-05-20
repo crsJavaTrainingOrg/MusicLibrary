@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import hu.adam.sipos.music.domain.Track;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class AlbumTest {
 
     @Before
     public void setUp() throws Exception {
-        masterOfPuppets = new Album("Master of Puppets", "rock", "1986.03.03", null);
+        masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986,03,03), null);
     }
     @Test
     public void AlbumHasEmptyTrackList() {

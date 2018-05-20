@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ArtistTest {
     @Test
     public void AddingAnAlbumToArtistArtistHasAnAlbumInAlbumList() {
         List<Album> metallicaAlbums = new ArrayList<>();
-        metallicaAlbums.add(new Album("Master of Puppets", "rock", "1986.03.03", null));
+        metallicaAlbums.add(new Album("Master of Puppets", "rock", LocalDate.of(1986,03,03), null));
         metallica.setAlbums(metallicaAlbums);
         Assert.assertFalse(metallica.getAlbums().isEmpty());
         Assert.assertEquals("Master of Puppets", metallica.getAlbums().get(0).getTitleOfAlbum());
@@ -37,7 +38,7 @@ public class ArtistTest {
     @Test
     public void deletingAnAlbumOfAnArtistAlbumIsNoLongerInAlbumlist() {
         List<Album> metallicaAlbums = new ArrayList<>();
-        metallicaAlbums.add((new Album("Master of Puppets", "rock", "1986.03.03", null)));
+        metallicaAlbums.add((new Album("Master of Puppets", "rock", LocalDate.of(1986,03,03), null)));
         metallica.setAlbums(metallicaAlbums);
         metallica.deleteAlbumWithCertainName("Master of Puppets");
         Assert.assertFalse(metallica.getAlbums().stream().anyMatch(item -> "Master of Puppets".equals(item.getTitleOfAlbum())));
@@ -47,7 +48,7 @@ public class ArtistTest {
     @Test
     public void searchingForAnAlbumWithACertainTitleReturnsTheSearchedAlbum() {
         List<Album> metallicaAlbums = new ArrayList<>();
-        Album masterOfPuppets = new Album("Master of Puppets", "rock", "1986.03.03", null);
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986,03,03), null);
         metallicaAlbums.add(masterOfPuppets);
         metallica.setAlbums(metallicaAlbums);
         Assert.assertEquals(masterOfPuppets ,metallica.search("Master of Puppets"));
@@ -56,16 +57,16 @@ public class ArtistTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void creatingAnAlbumWithNullAlbumTitleShouldResultIllegalArgumentException() {
-        new Album(null, "rock", "1986.03.03", null);
+        new Album(null, "rock", LocalDate.of(1986,03,03), null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void creatingAnAlbumWithIllegalFirstReleaseDateFormatShouldResultIllegalArgumentException() {
-        new Album("Master of Puppets", "rock", "03.03.1986", null);
+        new Album("Master of Puppets", "rock", LocalDate.of(01,01,19), null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void creatingAnAlbumWithZeroLengthStringAsNameOfCoStarsShouldResultIllegalArgumentException() {
-        new Album("Master of Puppets", "rock", "1986.03.03", "");
+        new Album("Master of Puppets", "rock", LocalDate.of(1986,03,03), "");
     }
 }

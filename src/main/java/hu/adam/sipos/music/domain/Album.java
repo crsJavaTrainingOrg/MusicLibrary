@@ -1,18 +1,20 @@
 package hu.adam.sipos.music.domain;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Album {
     private String titleOfAlbum;
     private String genre;
-    private String firstReleaseDate;
+    private LocalDate firstReleaseDate;
     private String nameOfCoStars;
     private List<Track> tracks = new ArrayList<>();
 
 
-    public Album(String titleOfAlbum,  String genre, String firstReleaseDate, String nameOfCoStars) {
+    public Album(String titleOfAlbum, String genre, LocalDate firstReleaseDate, String nameOfCoStars) {
         if(titleOfAlbum == null) {
             throw new IllegalArgumentException("You must specify a title for the album!");
         }
@@ -36,8 +38,11 @@ public class Album {
 
 
     }
-    private boolean DateVerifier(String firstReleaseDate){
-        return firstReleaseDate.matches("([12]\\d{3}\\.(0[1-9]|1[0-2])\\.(0[1-9]|[12]\\d|3[01]))");
+    private boolean DateVerifier(LocalDate firstReleaseDate){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+        String formattedString = firstReleaseDate.toString();
+
+        return formattedString.matches("([12]\\d{3}\\.(0[1-9]|1[0-2])\\.(0[1-9]|[12]\\d|3[01]))");
     }
 
 
@@ -49,7 +54,7 @@ public class Album {
         return genre;
     }
 
-    public String getFirstReleaseDate() {
+    public LocalDate getFirstReleaseDate() {
         return firstReleaseDate;
     }
 
