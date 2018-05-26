@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Library {
-    public  List<Artist> artists = new ArrayList<>();
+    public List<Artist> artists = new ArrayList<>();
     public List<Playlist> playlists = new ArrayList<>();
 
     public List<Artist> getArtists() {
