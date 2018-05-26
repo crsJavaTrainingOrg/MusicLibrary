@@ -25,20 +25,21 @@ public class Library {
     }
 
     public Artist searchArtist(String searchedArtist){
-        for(Artist a: artists){
-            if(a.getName().equals(searchedArtist)){
-                return a;
-            }
-        }
-        return null;
+        return artists.stream().filter(artist -> artist.getName().equals(searchedArtist)).findFirst().orElse(null);
     }
 
 
     public Album searchAlbum(String searchedAlbum) {
+        return artists.stream().flatMap(artist -> artist.getAlbums().stream()).filter(album -> album.getTitleOfAlbum().equals(searchedAlbum)).findFirst().orElse(null);
+    }
+
+    public Track searchTrack(String searchedTrack) {
         for(Artist artist: artists){
             for(Album album: artist.getAlbums()){
-                if(album.getTitleOfAlbum().equals(searchedAlbum)){
-                    return album;
+                for (Track track: album.getTracks()){
+                    if (track.getTrackTitle().equals(searchedTrack)){
+                        return track;
+                    }
                 }
             }
         }

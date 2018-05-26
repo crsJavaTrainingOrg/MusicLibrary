@@ -52,13 +52,29 @@ public class LibraryTest {
     }
 
     @Test
-    public void searchingAnAlbumWithCertainTitleIfAlbumExistsReturnAlbumWithSameTitle() {
+    public void searchingAnAlbumWithCertainAlbumTitleIfAlbumExistsReturnAlbumWithSameTitle() {
         myArtists.add(metallica);
         library.setArtists(myArtists);
         List<Album> metallicaAlbums = new ArrayList<>();
         metallicaAlbums.add(new Album("Master of Puppets", "rock", LocalDate.of(1986, 03, 03), null));
         metallica.setAlbums(metallicaAlbums);
         Assert.assertEquals("Master of Puppets", library.searchAlbum("Master of Puppets").getTitleOfAlbum());
+    }
+
+    @Test
+    public void searchingATrackWithCertainTrackTitleIfTrackExistsReturnTrackWithSameTitle() {
+        myArtists.add(metallica);
+        library.setArtists(myArtists);
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 03, 03), null);
+        List<Album> metallicaAlbums = new ArrayList<>();
+        metallicaAlbums.add(masterOfPuppets);
+        metallica.setAlbums(metallicaAlbums);
+        Track battery = new Track("Battery",312,false);
+        List<Track> tracks = new ArrayList<>();
+        tracks.add(battery);
+        masterOfPuppets.setTracks(tracks);
+        Assert.assertEquals("Battery",library.searchTrack("Battery").getTrackTitle());
+
     }
     /*    @Test
     public void addingAlbumsToTheEmptyAlbumList() {
