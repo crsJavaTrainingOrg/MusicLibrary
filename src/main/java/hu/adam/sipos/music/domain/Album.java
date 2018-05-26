@@ -21,12 +21,12 @@ public class Album {
         else{
             this.titleOfAlbum = titleOfAlbum;
         }
-        if(DateVerifier(firstReleaseDate)){
+        /*if(DateVerifier(firstReleaseDate)){
             this.firstReleaseDate = firstReleaseDate;
         }
         else{
             throw new IllegalArgumentException("The format of the date is illegal. The firstReleaseDate must be yyyy.mm.dd format");
-        }
+        }*/
 
         this.genre = genre;
         if(nameOfCoStars ==null){
@@ -38,12 +38,12 @@ public class Album {
 
 
     }
-    private boolean DateVerifier(LocalDate firstReleaseDate){
+  /*  private boolean DateVerifier(LocalDate firstReleaseDate){
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-dd-MM");
         String formattedString = firstReleaseDate.toString();
 
         return formattedString.matches("([12]\\d{3}\\.(0[1-9]|1[0-2])\\.(0[1-9]|[12]\\d|3[01]))");
-    }
+    }*/
 
 
     public String getTitleOfAlbum() {

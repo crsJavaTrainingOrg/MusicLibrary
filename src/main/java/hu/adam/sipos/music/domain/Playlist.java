@@ -1,14 +1,16 @@
 package hu.adam.sipos.music.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Playlist {
-    private String titleOfPlaylist;
-    private List<Track> tracksOfPlaylist = new ArrayList<>();
+    private final String titleOfPlaylist;
+    private final List<Track> tracksOfPlaylist;
 
-    public Playlist(String titleOfPlaylist) {
+    public Playlist(String titleOfPlaylist, Track... track) {
         this.titleOfPlaylist = titleOfPlaylist;
+        tracksOfPlaylist = new ArrayList<>(Arrays.asList(track));
     }
 
     public String getTitleOfPlaylist() {
@@ -16,6 +18,6 @@ public class Playlist {
     }
 
     public List<Track> getTracksOfPlaylist() {
-        return tracksOfPlaylist;
+        return new ArrayList<>(tracksOfPlaylist);
     }
 }
