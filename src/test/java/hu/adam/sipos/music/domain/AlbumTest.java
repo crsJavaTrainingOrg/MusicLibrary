@@ -9,13 +9,14 @@ import hu.adam.sipos.music.domain.Track;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AlbumTest {
     private Album masterOfPuppets;
 
     @Before
     public void setUp() throws Exception {
-        masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986,03,03), null);
+        masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986,3,3), null);
     }
     @Test
     public void AlbumHasEmptyTrackList() {
@@ -32,7 +33,7 @@ public class AlbumTest {
         Assert.assertFalse(masterOfPuppets.getTracks().isEmpty());
         Assert.assertEquals("Battery",masterOfPuppets.getTracks().get(0).getTrackTitle());
         Assert.assertEquals(312,masterOfPuppets.getTracks().get(0).getTrackLength());
-        Assert.assertEquals(false,masterOfPuppets.getTracks().get(0).isExplicitContent());
+        Assert.assertFalse(masterOfPuppets.getTracks().get(0).isExplicitContent());
         Assert.assertEquals("05:12",masterOfPuppets.getTracks().get(0).getTrackLengthString());
     }
 
@@ -52,7 +53,20 @@ public class AlbumTest {
         Track battery = new Track("Battery",312,false);
         tracks.add(battery);
         masterOfPuppets.setTracks(tracks);
-        Assert.assertEquals(battery,masterOfPuppets.searchTracks("Battery"));
+        Optional<Track> batteryOptional = masterOfPuppets.searchTracks("Battery");
+        Assert.assertTrue(batteryOptional.isPresent());
+        Assert.assertEquals("Battery", batteryOptional.get().getTrackTitle());
+    }
+
+    @Test
+    public void searchingForATrackWithLambdaTrackTitleReturnsTheSearchedTrack() {
+        List <Track> tracks = new ArrayList<>();
+        Track battery = new Track("Battery",312,false);
+        tracks.add(battery);
+        masterOfPuppets.setTracks(tracks);
+        Optional<Track> batteryOptional = masterOfPuppets.searchTracks(track -> track.getTrackTitle().equals("Battery"));
+        Assert.assertTrue(batteryOptional.isPresent());
+        Assert.assertEquals("Battery", batteryOptional.get().getTrackTitle());
     }
 
 

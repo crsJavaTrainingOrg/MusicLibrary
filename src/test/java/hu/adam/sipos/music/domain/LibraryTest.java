@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
+import java.util.Optional;
 
 public class LibraryTest {
     private Library library = new Library();
@@ -48,7 +48,10 @@ public class LibraryTest {
     public void searchingAnArtistWithCertainNameIfArtistExistsReturnArtistWithSameName() {
         myArtists.add(metallica);
         library.setArtists(myArtists);
-        Assert.assertEquals("Metallica", library.searchArtist("Metallica").getName());
+
+        Optional<Artist> metallicaOptional = library.searchArtist("Metallica");
+        Assert.assertTrue(metallicaOptional.isPresent());
+        Assert.assertEquals("Metallica", metallicaOptional.get().getName());
     }
 
     @Test
@@ -56,9 +59,11 @@ public class LibraryTest {
         myArtists.add(metallica);
         library.setArtists(myArtists);
         List<Album> metallicaAlbums = new ArrayList<>();
-        metallicaAlbums.add(new Album("Master of Puppets", "rock", LocalDate.of(1986, 03, 03), null));
+        metallicaAlbums.add(new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null));
         metallica.setAlbums(metallicaAlbums);
-        Assert.assertEquals("Master of Puppets", library.searchAlbum("Master of Puppets").getTitleOfAlbum());
+        List<Album> masterOfPuppets = library.searchAlbumByTitle("Master of Puppets");
+        Assert.assertEquals(1,  masterOfPuppets.size());
+        Assert.assertEquals("Master of Puppets", masterOfPuppets.get(0).getTitleOfAlbum());
     }
     /*    @Test
     public void addingAlbumsToTheEmptyAlbumList() {

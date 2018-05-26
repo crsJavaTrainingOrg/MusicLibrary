@@ -2,6 +2,7 @@ package hu.adam.sipos.music.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Artist {
     private String name;
@@ -31,12 +32,9 @@ public class Artist {
         albums.removeIf(album -> album.getTitleOfAlbum().equals(titleOfAlbumToDelete));
     }
 
-    public Album search(String titleOfSearchedAlbum) {
-        for(Album a: albums){
-            if(a.getTitleOfAlbum().equals(titleOfSearchedAlbum)){
-                return a;
-            }
-        }
-        return null;
+    public Optional<Album> searchAlbumByAlbumTitle(String titleOfSearchedAlbum) {
+        return albums.stream()
+                .filter(a -> a.getTitleOfAlbum().equals(titleOfSearchedAlbum))
+                .findFirst();
     }
 }

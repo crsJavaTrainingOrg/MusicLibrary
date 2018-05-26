@@ -42,10 +42,10 @@ public class PlaylistTest {
         Assert.assertEquals(2,car.getTracksOfPlaylist().size());
         Assert.assertEquals("Battery",tracksInCarPlayList.get(0).getTrackTitle());
         Assert.assertEquals(312,tracksInCarPlayList.get(0).getTrackLength());
-        Assert.assertEquals(false,tracksInCarPlayList.get(0).isExplicitContent());
+        Assert.assertFalse(tracksInCarPlayList.get(0).isExplicitContent());
         Assert.assertEquals("Master of Puppets",tracksInCarPlayList.get(1).getTrackTitle());
         Assert.assertEquals(400,tracksInCarPlayList.get(1).getTrackLength());
-        Assert.assertEquals(false,tracksInCarPlayList.get(1).isExplicitContent());
+        Assert.assertFalse(tracksInCarPlayList.get(1).isExplicitContent());
 
     }
 

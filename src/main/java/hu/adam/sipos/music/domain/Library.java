@@ -2,6 +2,8 @@ package hu.adam.sipos.music.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Library {
     public  List<Artist> artists = new ArrayList<>();
@@ -24,24 +26,17 @@ public class Library {
         this.playlists = playlist;
     }
 
-    public Artist searchArtist(String searchedArtist){
-        for(Artist a: artists){
-            if(a.getName().equals(searchedArtist)){
-                return a;
-            }
-        }
-        return null;
+    public Optional<Artist> searchArtist(String searchedArtist) {
+        return artists.stream()
+                .filter(a -> a.getName().equals(searchedArtist))
+                .findFirst();
     }
 
-
-    public Album searchAlbum(String searchedAlbum) {
-        for(Artist artist: artists){
-            for(Album album: artist.getAlbums()){
-                if(album.getTitleOfAlbum().equals(searchedAlbum)){
-                    return album;
-                }
-            }
-        }
-        return null;
+    public List<Album> searchAlbumByTitle(String searchedAlbumTitle) {
+        return artists.stream()
+                .map(artist -> artist.searchAlbumByAlbumTitle(searchedAlbumTitle))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
     }
 }
