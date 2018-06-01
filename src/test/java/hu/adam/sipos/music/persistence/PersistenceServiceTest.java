@@ -4,7 +4,7 @@ import hu.adam.sipos.music.domain.Album;
 import hu.adam.sipos.music.domain.Artist;
 import hu.adam.sipos.music.domain.Library;
 import hu.adam.sipos.music.domain.Track;
-import hu.adam.sipos.music.serialization.JsonSerializerService;
+import hu.adam.sipos.music.serialization.JsonSerializationService;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class PersistenceServiceTest {
                 "[{'trackTitle':'Battery','trackLength':312,'trackLengthString':'05:12'," +
                 "'explicitContent':false}]}]}]}").replaceAll("\'","\"");
 
-        FilePersistenceService filePersistenceService = new FilePersistenceService(new JsonSerializerService());
+        FilePersistenceService filePersistenceService = new FilePersistenceService(new JsonSerializationService());
 
         String filePath = "build/test/MusicLibrary/library.json";
         filePersistenceService.persist(filePath, library);

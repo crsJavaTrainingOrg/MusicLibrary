@@ -9,29 +9,29 @@ import org.junit.Test;
 
 import java.util.Collections;
 
-public class JsonSerializerServiceTest {
+public class JsonSerializationServiceTest {
     private Library library = new Library();
 
     @Test
     public void libraryIsSerializedHasValue() {
-        JsonSerializerService jsonSerializerService = new JsonSerializerService();
+        SerializationService serializationService = new JsonSerializationService();
 
-        String serialize = jsonSerializerService.serialize(library);
+        String serialize = serializationService.serialize(library);
         Assert.assertNotNull(serialize);
         Assert.assertNotSame("", serialize.trim());
     }
 
     @Test
     public void shouldSerializeEmptyJson() {
-        JsonSerializerService jsonSerializerService = new JsonSerializerService();
+        SerializationService serializationService = new JsonSerializationService();
 
         String expectedResult = "{'artists':[]}".replaceAll("\'","\"");
-        Assert.assertEquals(expectedResult, jsonSerializerService.serialize(library));
+        Assert.assertEquals(expectedResult, serializationService.serialize(library));
     }
 
     @Test
     public void shouldSerializeArtist() {
-        JsonSerializerService jsonSerializerService = new JsonSerializerService();
+        SerializationService serializationService = new JsonSerializationService();
 
         Track battery = new Track("Battery","05:12",false);
         Album masterOfPuppets = new Album("Master of Puppets", "rock", "1986.03.03", null);
@@ -44,6 +44,6 @@ public class JsonSerializerServiceTest {
                 "[{'trackTitle':'Battery','trackLength':312,'trackLengthString':'05:12'," +
                 "'explicitContent':false}]}]}]}").replaceAll("\'","\"");
 
-        Assert.assertEquals(expectedResult, jsonSerializerService.serialize(library));
+        Assert.assertEquals(expectedResult, serializationService.serialize(library));
     }
 }

@@ -3,9 +3,10 @@ package hu.adam.sipos.music.serialization;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JsonSerializerService {
+public class JsonSerializationService implements SerializationService {
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    @Override
     public String serialize(Object object) {
         String json;
         try {

@@ -1,6 +1,6 @@
 package hu.adam.sipos.music.persistence;
 
-import hu.adam.sipos.music.serialization.JsonSerializerService;
+import hu.adam.sipos.music.serialization.SerializationService;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,15 +9,15 @@ import java.nio.file.Paths;
 
 public class FilePersistenceService {
 
-    private JsonSerializerService jsonSerializerService;
+    private SerializationService serializationService;
 
-    public FilePersistenceService(JsonSerializerService jsonSerializerService) {
-        this.jsonSerializerService = jsonSerializerService;
+    public FilePersistenceService(SerializationService serializationService) {
+        this.serializationService = serializationService;
     }
 
     public void persist(String pathString, Object object) throws IOException {
         Path path = Paths.get(pathString);
-        Files.write(path, jsonSerializerService.serialize(object).getBytes());
+        Files.write(path, serializationService.serialize(object).getBytes());
     }
 
     public String load(String pathString) throws IOException {
