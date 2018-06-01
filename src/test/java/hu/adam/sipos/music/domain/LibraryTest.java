@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,13 +46,13 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldSerializeEmptyJson() throws JsonProcessingException {
+    public void shouldSerializeEmptyJson() {
         String expectedResult = "{'artists':[]}".replaceAll("\'","\"");
         Assert.assertEquals(expectedResult, library.serialize());
     }
 
     @Test
-    public void shouldSerializeArtist() throws JsonProcessingException {
+    public void shouldSerializeArtist() {
         Track battery = new Track("Battery","05:12",false);
         Album masterOfPuppets = new Album("Master of Puppets", "rock", "1986.03.03", null);
         masterOfPuppets.setTracks(Collections.singletonList(battery));
@@ -63,5 +64,24 @@ public class LibraryTest {
                 "[{'trackTitle':'Battery','trackLength':312,'trackLengthString':'05:12'," +
                 "'explicitContent':false}]}]}]}").replaceAll("\'","\"");
         Assert.assertEquals(expectedResult, library.serialize());
+    }
+
+    @Test
+    public void shouldPersistLibrary() throws IOException {
+        Track battery = new Track("Battery","05:12",false);
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", "1986.03.03", null);
+        masterOfPuppets.setTracks(Collections.singletonList(battery));
+        Artist metallica = new Artist("Metallica");
+        metallica.setAlbums(Collections.singletonList(masterOfPuppets));
+        library.setArtists(Collections.singletonList(metallica));
+        String expectedResult = ("{'artists':[{'name':'Metallica','albums':[{'titleOfAlbum':'Master of Puppets'," +
+                "'genre':'rock','firstReleaseDate':'1986.03.03','nameOfCoStars':null,'tracks':" +
+                "[{'trackTitle':'Battery','trackLength':312,'trackLengthString':'05:12'," +
+                "'explicitContent':false}]}]}]}").replaceAll("\'","\"");
+
+        String filePath = "build/test/MusicLibrary/library.json";
+        library.persist(filePath);
+        String libraryJson = library.load(filePath);
+        Assert.assertEquals(expectedResult, libraryJson);
     }
 }
