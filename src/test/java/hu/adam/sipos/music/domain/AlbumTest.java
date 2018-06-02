@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class AlbumTest {
     private Album masterOfPuppets;
@@ -64,7 +65,17 @@ public class AlbumTest {
         Track battery = new Track("Battery",312,false);
         tracks.add(battery);
         masterOfPuppets.setTracks(tracks);
-        Optional<Track> batteryOptional = masterOfPuppets.searchTracks(track -> track.getTrackTitle().equals("Battery"));
+        Predicate<Track> batteryTrackPredicateLambda = track -> track.getTrackTitle().equals("Battery");
+        Predicate<Track> batteryTrackPredicateInlineInterfaceImplementation = new Predicate<Track>() {
+            @Override
+            public boolean test(Track track) {
+                if (track.getTrackTitle().equals("Battery")) {
+                    return true;
+                }
+                return false;
+            }
+        };
+        Optional<Track> batteryOptional = masterOfPuppets.searchTracks(batteryTrackPredicateInlineInterfaceImplementation);
         Assert.assertTrue(batteryOptional.isPresent());
         Assert.assertEquals("Battery", batteryOptional.get().getTrackTitle());
     }
