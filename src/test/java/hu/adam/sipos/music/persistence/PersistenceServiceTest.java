@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.Collections;
     public class PersistenceServiceTest {
 
-        private final String FILE_PATH = "library.json";
+        private final String FILE_PATH = "./build/tmp/library.json";
 
         @After
         public void tearDown() throws Exception {
