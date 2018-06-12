@@ -27,7 +27,7 @@ public class JsonSerializationServiceTest {
     public void shouldSerializeEmptyJson() {
         SerializationService serializationService = new JsonSerializationService();
 
-        String expectedResult = "{'artists':[]}".replaceAll("\'", "\"");
+        String expectedResult = "{'artists':[],'playlists':[]}".replaceAll("\'", "\"");
         Assert.assertEquals(expectedResult, serializationService.serialize(library));
     }
 
@@ -42,9 +42,9 @@ public class JsonSerializationServiceTest {
         metallica.setAlbums(Collections.singletonList(masterOfPuppets));
         library.setArtists(Collections.singletonList(metallica));
         String expectedResult = ("{'artists':[{'name':'Metallica','albums':[{'titleOfAlbum':'Master of Puppets'," +
-                "'genre':'rock','firstReleaseDate':'1986.03.03','nameOfCoStars':null,'tracks':" +
+                "'genre':'rock','firstReleaseDate':'1986-03-03','nameOfCoStars':null,'tracks':" +
                 "[{'trackTitle':'Battery','trackLength':312,'trackLengthString':'05:12'," +
-                "'explicitContent':false}]}]}]}").replaceAll("\'", "\"");
+                "'explicitContent':false}]}]}],'playlists':[]}").replaceAll("\'", "\"");
 
         Assert.assertEquals(expectedResult, serializationService.serialize(library));
     }
