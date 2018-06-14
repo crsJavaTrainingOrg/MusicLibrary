@@ -33,7 +33,7 @@ public class JsonSerializationServiceTest {
     }
 
     @Test
-    public void shouldSerializeLibrary() {
+    public void shouldSerializeAndDeserializeLibrary() {
         SerializationService serializationService = new JsonSerializationService();
 
         Track battery = new Track("Battery", "05:12", false);
