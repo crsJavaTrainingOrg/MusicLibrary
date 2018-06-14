@@ -1,22 +1,20 @@
 package hu.adam.sipos.music.domain;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class PlaylistTest {
     private Library library = new Library();
-    private List<Playlist> playlists = library.getPlaylists();
+    private List<Playlist> playlists = library.getPlayLists();
 
 
     @Test
     public void addingAPlayListToTheArrayOfPlayListsArrayOfPlayListHasAnElement() {
         playlists.add(new Playlist("Car"));
-        library.setPlaylists(playlists);
-        Assert.assertEquals(1,library.getPlaylists().size());
+        library.setPlayLists(playlists);
+        Assert.assertEquals(1,library.getPlayLists().size());
 
     }
 

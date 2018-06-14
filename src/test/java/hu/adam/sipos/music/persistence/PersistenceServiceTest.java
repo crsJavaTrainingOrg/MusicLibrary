@@ -36,7 +36,7 @@ import java.util.Collections;
             String expectedResult = ("{'artists':[{'name':'Metallica','albums':[{'titleOfAlbum':'Master of Puppets'," +
                     "'genre':'rock','firstReleaseDate':'1986-03-03','nameOfCoStars':null,'tracks':" +
                     "[{'trackTitle':'Battery','trackLength':312,'trackLengthString':'05:12'," +
-                    "'explicitContent':false}]}]}],'playlists':[]}").replaceAll("\'", "\"");
+                    "'explicitContent':false}]}]}],'playLists':[]}").replaceAll("\'", "\"");
 
             FilePersistenceService filePersistenceService = new FilePersistenceService(new JsonSerializationService());
             filePersistenceService.persist(FILE_PATH, library);

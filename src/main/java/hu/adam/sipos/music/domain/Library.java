@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Library {
     public List<Artist> artists = new ArrayList<>();
-    public List<Playlist> playlists = new ArrayList<>();
+    public List<Playlist> playLists = new ArrayList<>();
 
     public List<Artist> getArtists() {
         return artists;
@@ -18,12 +18,12 @@ public class Library {
     }
 
 
-    public List<Playlist> getPlaylists() {
-        return playlists;
+    public List<Playlist> getPlayLists() {
+        return playLists;
     }
 
-    public void setPlaylists(List<Playlist> playlist) {
-        this.playlists = playlist;
+    public void setPlayLists(List<Playlist> playlist) {
+        this.playLists = playlist;
     }
 
     public Optional<Artist> searchArtist(String searchedArtist) {
