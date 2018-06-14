@@ -51,7 +51,6 @@ public class Library {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(artists, playLists);
     }
 }

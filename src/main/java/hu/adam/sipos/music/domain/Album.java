@@ -85,7 +85,6 @@ public class Album {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(titleOfAlbum, genre, firstReleaseDate, nameOfCoStars, tracks);
     }
 }

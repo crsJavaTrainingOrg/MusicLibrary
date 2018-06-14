@@ -1,6 +1,7 @@
 package hu.adam.sipos.music.serialization;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -8,6 +9,7 @@ import hu.adam.sipos.music.domain.Library;
 import hu.adam.sipos.music.dtos.LibraryDto;
 
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
 
 public class JsonSerializationService implements SerializationService{
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -29,9 +31,10 @@ public class JsonSerializationService implements SerializationService{
     }
 
     @Override
-    public Object deserialize(String serializedObject) {
+    //https://github.com/FasterXML/jackson-databind/issues/1490
+    public <T> T deserialize(String serialized, Class<T> clazz) {
         try {
-            return objectMapper.readValue(serializedObject, LibraryDto.class);
+            return objectMapper.readValue(serialized, clazz);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

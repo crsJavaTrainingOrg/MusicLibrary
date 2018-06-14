@@ -50,7 +50,6 @@ public class Artist {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(name, albums);
     }
 }

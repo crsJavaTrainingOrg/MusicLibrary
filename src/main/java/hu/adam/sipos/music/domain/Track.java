@@ -49,7 +49,6 @@ public class Track {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(trackTitle, trackLength, isExplicitContent);
     }
 }

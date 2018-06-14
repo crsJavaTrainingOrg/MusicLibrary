@@ -38,7 +38,6 @@ public class Playlist {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(titleOfPlaylist, tracksOfPlaylist);
     }
 }

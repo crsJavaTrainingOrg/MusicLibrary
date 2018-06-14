@@ -48,7 +48,7 @@ public class JsonSerializationServiceTest {
                 "'explicitContent':false}]}]}],'playLists':[]}").replaceAll("\'", "\"");
 
         Assert.assertEquals(serializedLibrary, serializationService.serialize(library));
-        Assert.assertEquals(library, (((LibraryDto) serializationService.deserialize(serializedLibrary)).toDomain()));
+        Assert.assertEquals(library, (serializationService.deserialize(serializedLibrary, LibraryDto.class)).toDomain());
 
     }
 }
