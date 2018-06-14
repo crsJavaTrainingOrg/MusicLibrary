@@ -3,6 +3,7 @@ package hu.adam.sipos.music.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Playlist {
     private final String titleOfPlaylist;
@@ -24,5 +25,20 @@ public class Playlist {
 
     public List<Track> getTracksOfPlaylist() {
         return new ArrayList<>(tracksOfPlaylist);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Playlist playlist = (Playlist) o;
+        return Objects.equals(titleOfPlaylist, playlist.titleOfPlaylist) &&
+                Objects.equals(tracksOfPlaylist, playlist.tracksOfPlaylist);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(titleOfPlaylist, tracksOfPlaylist);
     }
 }

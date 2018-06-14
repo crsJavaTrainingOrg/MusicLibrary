@@ -4,6 +4,7 @@ import hu.adam.sipos.music.domain.Album;
 import hu.adam.sipos.music.domain.Artist;
 import hu.adam.sipos.music.domain.Library;
 import hu.adam.sipos.music.domain.Track;
+import hu.adam.sipos.music.dtos.LibraryDto;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -47,7 +48,7 @@ public class JsonSerializationServiceTest {
                 "'explicitContent':false}]}]}],'playLists':[]}").replaceAll("\'", "\"");
 
         Assert.assertEquals(serializedLibrary, serializationService.serialize(library));
-        Assert.assertEquals(library, serializationService.deserialize(serializedLibrary));
+        Assert.assertEquals(library, (((LibraryDto) serializationService.deserialize(serializedLibrary)).toDomain()));
 
     }
 }

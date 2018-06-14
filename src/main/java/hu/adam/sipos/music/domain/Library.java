@@ -2,6 +2,7 @@ package hu.adam.sipos.music.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -37,5 +38,20 @@ public class Library {
 
     public void setPlayLists(List<Playlist> playlist) {
         this.playLists = playlist;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Library library = (Library) o;
+        return Objects.equals(artists, library.artists) &&
+                Objects.equals(playLists, library.playLists);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(artists, playLists);
     }
 }

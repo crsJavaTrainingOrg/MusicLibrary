@@ -1,11 +1,10 @@
 package hu.adam.sipos.music.domain;
 
 
-import hu.adam.sipos.music.dtos.AlbumDto;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -70,5 +69,23 @@ public class Album {
         return tracks.stream()
                 .filter(predicate)
                 .findFirst();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Album album = (Album) o;
+        return Objects.equals(titleOfAlbum, album.titleOfAlbum) &&
+                Objects.equals(genre, album.genre) &&
+                Objects.equals(firstReleaseDate, album.firstReleaseDate) &&
+                Objects.equals(nameOfCoStars, album.nameOfCoStars) &&
+                Objects.equals(tracks, album.tracks);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(titleOfAlbum, genre, firstReleaseDate, nameOfCoStars, tracks);
     }
 }

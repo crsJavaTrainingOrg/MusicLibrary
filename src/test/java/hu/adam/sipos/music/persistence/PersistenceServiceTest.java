@@ -28,7 +28,7 @@ import java.util.Collections;
             Library library = new Library();
 
             Track battery = new Track("Battery", "05:12", false);
-            Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 03, 03), null);
+            Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null);
             masterOfPuppets.setTracks(Collections.singletonList(battery));
             Artist metallica = new Artist("Metallica");
             metallica.setAlbums(Collections.singletonList(masterOfPuppets));

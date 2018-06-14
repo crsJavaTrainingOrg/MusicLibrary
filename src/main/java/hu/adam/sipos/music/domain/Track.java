@@ -1,9 +1,7 @@
 package hu.adam.sipos.music.domain;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import hu.adam.sipos.music.dtos.TrackDto;
+import java.util.Objects;
 
-@JsonPropertyOrder({"trackTitle", "trackLength", "isExplicitContent"})
 public class Track {
     private String trackTitle;
     private int trackLength;
@@ -23,10 +21,6 @@ public class Track {
         this.isExplicitContent = isExplicitContent;
     }
 
-    public static Track toDomain(TrackDto trackDto) {
-        return new Track(trackDto.getTrackTitle(), trackDto.getTrackLength(), trackDto.isExplicitContent());
-    }
-
     public String asTrackLengthString() {
         return String.format("%02d:%02d",trackLength / 60, trackLength % 60);
     }
@@ -41,5 +35,21 @@ public class Track {
 
     public boolean isExplicitContent() {
         return isExplicitContent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Track track = (Track) o;
+        return trackLength == track.trackLength &&
+                isExplicitContent == track.isExplicitContent &&
+                Objects.equals(trackTitle, track.trackTitle);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(trackTitle, trackLength, isExplicitContent);
     }
 }
