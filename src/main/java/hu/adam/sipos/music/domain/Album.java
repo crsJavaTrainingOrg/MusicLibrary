@@ -1,6 +1,8 @@
 package hu.adam.sipos.music.domain;
 
 
+import hu.adam.sipos.music.dtos.AlbumDto;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +30,8 @@ public class Album {
             this.nameOfCoStars = nameOfCoStars;
         }
         this.firstReleaseDate = firstReleaseDate;
-
-
     }
+
     public String getTitleOfAlbum() {
         return titleOfAlbum;
     }

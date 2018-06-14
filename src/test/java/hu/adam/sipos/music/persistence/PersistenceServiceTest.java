@@ -35,7 +35,7 @@ import java.util.Collections;
             library.setArtists(Collections.singletonList(metallica));
             String expectedResult = ("{'artists':[{'name':'Metallica','albums':[{'titleOfAlbum':'Master of Puppets'," +
                     "'genre':'rock','firstReleaseDate':'1986-03-03','nameOfCoStars':null,'tracks':" +
-                    "[{'trackTitle':'Battery','trackLength':312,'trackLengthString':'05:12'," +
+                    "[{'trackTitle':'Battery','trackLength':312," +
                     "'explicitContent':false}]}]}],'playLists':[]}").replaceAll("\'", "\"");
 
             FilePersistenceService filePersistenceService = new FilePersistenceService(new JsonSerializationService());

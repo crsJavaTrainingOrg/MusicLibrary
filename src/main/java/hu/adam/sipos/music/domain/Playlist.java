@@ -13,6 +13,11 @@ public class Playlist {
         tracksOfPlaylist = new ArrayList<>(Arrays.asList(track));
     }
 
+    public Playlist(String titleOfPlaylist, List<Track> tracksOfPlaylist) {
+        this.titleOfPlaylist = titleOfPlaylist;
+        this.tracksOfPlaylist = tracksOfPlaylist;
+    }
+
     public String getTitleOfPlaylist() {
         return titleOfPlaylist;
     }

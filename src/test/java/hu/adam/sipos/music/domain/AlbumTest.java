@@ -34,7 +34,7 @@ public class AlbumTest {
         Assert.assertEquals("Battery",masterOfPuppets.getTracks().get(0).getTrackTitle());
         Assert.assertEquals(312,masterOfPuppets.getTracks().get(0).getTrackLength());
         Assert.assertFalse(masterOfPuppets.getTracks().get(0).isExplicitContent());
-        Assert.assertEquals("05:12",masterOfPuppets.getTracks().get(0).getTrackLengthString());
+        Assert.assertEquals("05:12",masterOfPuppets.getTracks().get(0).asTrackLengthString());
     }
 
     @Test

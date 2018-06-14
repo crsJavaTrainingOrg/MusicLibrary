@@ -16,6 +16,16 @@ public class Artist {
         this.name = name;
     }
 
+    public void deleteAlbumWithCertainName(String titleOfAlbumToDelete) {
+        albums.removeIf(album -> album.getTitleOfAlbum().equals(titleOfAlbumToDelete));
+    }
+
+    public Optional<Album> searchAlbumByAlbumTitle(String titleOfSearchedAlbum) {
+        return albums.stream()
+                .filter(a -> a.getTitleOfAlbum().equals(titleOfSearchedAlbum))
+                .findFirst();
+    }
+
     public List<Album> getAlbums() {
         return albums;
     }
@@ -26,15 +36,5 @@ public class Artist {
 
     public String getName() {
         return name;
-    }
-
-    public void deleteAlbumWithCertainName(String titleOfAlbumToDelete) {
-        albums.removeIf(album -> album.getTitleOfAlbum().equals(titleOfAlbumToDelete));
-    }
-
-    public Optional<Album> searchAlbumByAlbumTitle(String titleOfSearchedAlbum) {
-        return albums.stream()
-                .filter(a -> a.getTitleOfAlbum().equals(titleOfSearchedAlbum))
-                .findFirst();
     }
 }
