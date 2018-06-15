@@ -2,7 +2,6 @@ package hu.adam.sipos.music.persistence;
 
 import hu.adam.sipos.music.domain.Album;
 import hu.adam.sipos.music.domain.Artist;
-import hu.adam.sipos.music.domain.Library;
 import hu.adam.sipos.music.domain.Track;
 import hu.adam.sipos.music.serialization.JsonSerializationService;
 import org.junit.After;
@@ -15,9 +14,8 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Collections;
 
-public class LibraryFileRepositoryTest {
-
-    private final String FILE_PATH = "./build/tmp/library.json";
+public class ArtistRepositoryTest {
+    private final String FILE_PATH = "./build/tmp/artist.json";
 
     @After
     public void tearDown() throws Exception {
@@ -25,21 +23,17 @@ public class LibraryFileRepositoryTest {
     }
 
     @Test
-    public void shouldSaveAndLoadLibrary() {
-        Library library = new Library();
-
+    public void shouldSaveAndLoadArtist() {
         Track battery = new Track("Battery", "05:12", false);
         Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null);
         masterOfPuppets.setTracks(Collections.singletonList(battery));
         Artist metallica = new Artist("Metallica");
         metallica.setAlbums(Collections.singletonList(masterOfPuppets));
-        library.setArtists(Collections.singletonList(metallica));
 
-        Path libraryStorePath = Paths.get(FILE_PATH);
-        LibraryFileRepository libraryFileRepository = new LibraryFileRepository(libraryStorePath, new JsonSerializationService());
-        libraryFileRepository.save(library);
-        Library loadedLibrary = libraryFileRepository.load();
-        Assert.assertEquals(library, loadedLibrary);
+        Path artistStorePath = Paths.get(FILE_PATH);
+        ArtistFileRepository artistFileRepository = new ArtistFileRepository(artistStorePath, new JsonSerializationService());
+        artistFileRepository.save(metallica);
+        Artist loadedArtist = artistFileRepository.load();
+        Assert.assertEquals(metallica, loadedArtist);
     }
-
 }

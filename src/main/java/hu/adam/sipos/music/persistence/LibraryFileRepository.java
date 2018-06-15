@@ -1,7 +1,7 @@
 package hu.adam.sipos.music.persistence;
 
 import hu.adam.sipos.music.domain.Library;
-import hu.adam.sipos.music.domain.repository.LibraryRepository;
+import hu.adam.sipos.music.domain.repository.AbstractRepository;
 import hu.adam.sipos.music.dtos.LibraryDto;
 import hu.adam.sipos.music.serialization.SerializationService;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class LibraryFileRepository implements LibraryRepository {
+public class LibraryFileRepository implements AbstractRepository<Library> {
 
     private final Path libraryStorePath;
     private final SerializationService serializationService;
