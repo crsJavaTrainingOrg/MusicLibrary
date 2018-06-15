@@ -1,6 +1,6 @@
-package hu.adam.sipos.music.dtos;
+package hu.adam.sipos.music.track;
 
-import hu.adam.sipos.music.domain.Track;
+import hu.adam.sipos.music.track.Track;
 
 public class TrackDto {
     private String trackTitle;

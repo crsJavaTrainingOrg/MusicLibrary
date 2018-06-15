@@ -1,4 +1,4 @@
-package hu.adam.sipos.music.domain;
+package hu.adam.sipos.music.track;
 
 import java.util.Objects;
 

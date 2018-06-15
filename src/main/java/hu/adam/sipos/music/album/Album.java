@@ -1,5 +1,7 @@
-package hu.adam.sipos.music.domain;
+package hu.adam.sipos.music.album;
 
+
+import hu.adam.sipos.music.track.Track;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
-package hu.adam.sipos.music.domain;
+package hu.adam.sipos.music.artist;
 
+import hu.adam.sipos.music.album.Album;
+import hu.adam.sipos.music.artist.Artist;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

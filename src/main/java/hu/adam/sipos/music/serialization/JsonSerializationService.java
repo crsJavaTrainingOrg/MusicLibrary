@@ -1,15 +1,11 @@
 package hu.adam.sipos.music.serialization;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import hu.adam.sipos.music.domain.Library;
-import hu.adam.sipos.music.dtos.LibraryDto;
 
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 
 public class JsonSerializationService implements SerializationService{
     private ObjectMapper objectMapper = new ObjectMapper();

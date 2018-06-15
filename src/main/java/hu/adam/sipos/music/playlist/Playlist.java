@@ -1,4 +1,6 @@
-package hu.adam.sipos.music.domain;
+package hu.adam.sipos.music.playlist;
+
+import hu.adam.sipos.music.track.Track;
 
 import java.util.ArrayList;
 import java.util.Arrays;

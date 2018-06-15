@@ -1,6 +1,7 @@
-package hu.adam.sipos.music.dtos;
+package hu.adam.sipos.music.library;
 
-import hu.adam.sipos.music.domain.Library;
+import hu.adam.sipos.music.artist.ArtistDto;
+import hu.adam.sipos.music.playlist.PlaylistDto;
 
 import java.util.ArrayList;
 import java.util.List;

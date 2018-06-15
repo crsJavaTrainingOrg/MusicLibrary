@@ -1,8 +1,5 @@
 package hu.adam.sipos.music;
 
-import hu.adam.sipos.music.domain.Album;
-import hu.adam.sipos.music.domain.Library;
-
 public class MusicLibraryApp {
     public static void main(String[] args) {
      /*   Library l = new Library();

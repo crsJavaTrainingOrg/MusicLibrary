@@ -1,7 +1,7 @@
-package hu.adam.sipos.music.dtos;
+package hu.adam.sipos.music.playlist;
 
-import hu.adam.sipos.music.domain.Playlist;
-import hu.adam.sipos.music.domain.Track;
+import hu.adam.sipos.music.playlist.Playlist;
+import hu.adam.sipos.music.track.Track;
 
 import java.util.List;
 

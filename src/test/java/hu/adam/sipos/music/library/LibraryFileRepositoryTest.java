@@ -1,9 +1,8 @@
-package hu.adam.sipos.music.persistence;
+package hu.adam.sipos.music.library;
 
-import hu.adam.sipos.music.domain.Album;
-import hu.adam.sipos.music.domain.Artist;
-import hu.adam.sipos.music.domain.Library;
-import hu.adam.sipos.music.domain.Track;
+import hu.adam.sipos.music.album.Album;
+import hu.adam.sipos.music.artist.Artist;
+import hu.adam.sipos.music.track.Track;
 import hu.adam.sipos.music.serialization.JsonSerializationService;
 import org.junit.After;
 import org.junit.Assert;
