@@ -3,7 +3,6 @@ package hu.adam.sipos.music.persistence;
 import hu.adam.sipos.music.domain.Artist;
 import hu.adam.sipos.music.domain.repository.AbstractRepository;
 import hu.adam.sipos.music.dtos.ArtistDto;
-import hu.adam.sipos.music.dtos.LibraryDto;
 import hu.adam.sipos.music.serialization.SerializationService;
 
 import java.io.IOException;
