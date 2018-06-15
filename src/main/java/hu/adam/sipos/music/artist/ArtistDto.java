@@ -1,7 +1,6 @@
 package hu.adam.sipos.music.artist;
 
 import hu.adam.sipos.music.album.AlbumDto;
-import hu.adam.sipos.music.artist.Artist;
 
 import java.util.ArrayList;
 import java.util.List;

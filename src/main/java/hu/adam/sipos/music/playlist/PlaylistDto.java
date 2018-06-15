@@ -1,6 +1,5 @@
 package hu.adam.sipos.music.playlist;
 
-import hu.adam.sipos.music.playlist.Playlist;
 import hu.adam.sipos.music.track.Track;
 
 import java.util.List;

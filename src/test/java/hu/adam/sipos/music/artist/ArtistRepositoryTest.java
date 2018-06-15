@@ -1,10 +1,8 @@
 package hu.adam.sipos.music.artist;
 
 import hu.adam.sipos.music.album.Album;
-import hu.adam.sipos.music.artist.Artist;
-import hu.adam.sipos.music.artist.ArtistFileRepository;
-import hu.adam.sipos.music.track.Track;
 import hu.adam.sipos.music.serialization.JsonSerializationService;
+import hu.adam.sipos.music.track.Track;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;

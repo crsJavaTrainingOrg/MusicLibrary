@@ -1,7 +1,5 @@
 package hu.adam.sipos.music.track;
 
-import hu.adam.sipos.music.track.Track;
-
 public class TrackDto {
     private String trackTitle;
     private int trackLength;

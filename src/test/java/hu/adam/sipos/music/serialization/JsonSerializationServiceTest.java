@@ -3,8 +3,8 @@ package hu.adam.sipos.music.serialization;
 import hu.adam.sipos.music.album.Album;
 import hu.adam.sipos.music.artist.Artist;
 import hu.adam.sipos.music.library.Library;
-import hu.adam.sipos.music.track.Track;
 import hu.adam.sipos.music.library.LibraryDto;
+import hu.adam.sipos.music.track.Track;
 import org.junit.Assert;
 import org.junit.Test;
 

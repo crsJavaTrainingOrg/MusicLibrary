@@ -1,7 +1,6 @@
 package hu.adam.sipos.music.playlist;
 
 import hu.adam.sipos.music.library.Library;
-import hu.adam.sipos.music.playlist.Playlist;
 import hu.adam.sipos.music.track.Track;
 import org.junit.Assert;
 import org.junit.Test;

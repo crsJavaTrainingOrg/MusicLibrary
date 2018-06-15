@@ -1,8 +1,6 @@
 package hu.adam.sipos.music.library;
 
-import hu.adam.sipos.music.library.Library;
 import hu.adam.sipos.music.domain.repository.AbstractRepository;
-import hu.adam.sipos.music.library.LibraryDto;
 import hu.adam.sipos.music.serialization.SerializationService;
 
 import java.io.IOException;
