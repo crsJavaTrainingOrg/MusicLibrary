@@ -14,6 +14,9 @@ public class MusicLibraryManager {
     }
 
     public Library addOrOverride(Artist artist) {
+        if (artist == null) {
+            return library;
+        }
 
         OptionalInt artistIndexInLibraryOptional = IntStream.range(0, library.artists.size())
                 .filter(i -> library.getArtists().get(i).getName().equals(artist.getName()))

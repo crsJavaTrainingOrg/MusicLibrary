@@ -53,8 +53,31 @@ public class LibraryManagementTest {
 
     @After
     public void tearDown() throws Exception {
-        Files.delete(libraryStorePath);
-        Files.delete(artistsInputFilePath);
+        Files.deleteIfExists(libraryStorePath);
+        Files.deleteIfExists(artistsInputFilePath);
+    }
+
+    @Test
+    public void shouldSurviveEmptyLibraryAdd() {
+        Library library = new Library();
+        MusicLibraryManager musicLibraryManager = new MusicLibraryManager(library);
+        Library extendedLibrary = musicLibraryManager.addOrOverride(null);
+        Assert.assertEquals(library, extendedLibrary);
+    }
+
+    @Test
+    public void shouldSurviveNullArtistAdd() {
+        Library library = new Library();
+        Track battery = new Track("Battery", "05:12", false);
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null);
+        masterOfPuppets.setTracks(Collections.singletonList(battery));
+        Artist metallica = new Artist("Metallica");
+        metallica.setAlbums(Collections.singletonList(masterOfPuppets));
+        library.setArtists(Collections.singletonList(metallica));
+
+        MusicLibraryManager musicLibraryManager = new MusicLibraryManager(library);
+        Library extendedLibrary = musicLibraryManager.addOrOverride(null);
+        Assert.assertEquals(library, extendedLibrary);
     }
 
     @Test
@@ -126,11 +149,12 @@ public class LibraryManagementTest {
 
         artistFileRepository.save(metallica2);
 
-        MusicLibraryManager musicLibraryManager = new MusicLibraryManager(loadedLibrary);
-        musicLibraryManager.addOrOverride(jethroTull);
-        Library extendedLibrary = musicLibraryManager.addOrOverride(metallica2);
-        Library expectedLibrary = new Library();
+        Artist loadedArtist = artistFileRepository.load();
 
+        MusicLibraryManager musicLibraryManager = new MusicLibraryManager(loadedLibrary);
+        Library extendedLibrary = musicLibraryManager.addOrOverride(loadedArtist);
+
+        Library expectedLibrary = new Library();
         expectedLibrary.setArtists(Arrays.asList(metallica2, jethroTull));
 
         Assert.assertThat(expectedLibrary, is(extendedLibrary));
