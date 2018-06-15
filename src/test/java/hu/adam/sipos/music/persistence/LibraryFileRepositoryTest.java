@@ -11,10 +11,11 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Collections;
-    public class PersistenceServiceTest {
+    public class LibraryFileRepositoryTest {
 
         private final String FILE_PATH = "./build/tmp/library.json";
 
@@ -33,15 +34,12 @@ import java.util.Collections;
             Artist metallica = new Artist("Metallica");
             metallica.setAlbums(Collections.singletonList(masterOfPuppets));
             library.setArtists(Collections.singletonList(metallica));
-            String expectedResult = ("{'artists':[{'name':'Metallica','albums':[{'titleOfAlbum':'Master of Puppets'," +
-                    "'genre':'rock','firstReleaseDate':'1986-03-03','nameOfCoStars':null,'tracks':" +
-                    "[{'trackTitle':'Battery','trackLength':312," +
-                    "'explicitContent':false}]}]}],'playLists':[]}").replaceAll("\'", "\"");
 
-            FilePersistenceService filePersistenceService = new FilePersistenceService(new JsonSerializationService());
-            filePersistenceService.persist(FILE_PATH, library);
-            String libraryJson = filePersistenceService.load(FILE_PATH);
-            Assert.assertEquals(expectedResult, libraryJson);
+            Path libraryStorePath = Paths.get(FILE_PATH);
+            LibraryFileRepository libraryFileRepository = new LibraryFileRepository(libraryStorePath, new JsonSerializationService());
+            libraryFileRepository.save(library);
+            Library loadedLibrary = libraryFileRepository.load();
+            Assert.assertEquals(library, loadedLibrary);
         }
 
     }
