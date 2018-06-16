@@ -13,23 +13,12 @@ import java.util.Collections;
 
 
 public class JsonSerializationServiceTest {
-    private Library library = new Library();
-
-    @Test
-    public void libraryIsSerializedHasValue() {
-        SerializationService serializationService = new JsonSerializationService();
-
-        String serialize = serializationService.serialize(library);
-        Assert.assertNotNull(serialize);
-        Assert.assertNotSame("", serialize.trim());
-    }
-
     @Test
     public void shouldSerializeEmptyJson() {
         SerializationService serializationService = new JsonSerializationService();
 
         String expectedResult = "{'artists':[],'playLists':[]}".replaceAll("\'", "\"");
-        Assert.assertEquals(expectedResult, serializationService.serialize(library));
+        Assert.assertEquals(expectedResult, serializationService.serialize(new Library(Collections.emptyList(), Collections.emptyList())));
     }
 
     @Test
@@ -37,15 +26,15 @@ public class JsonSerializationServiceTest {
         SerializationService serializationService = new JsonSerializationService();
 
         Track battery = new Track("Battery", "05:12", false);
-        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null);
-        masterOfPuppets.setTracks(Collections.singletonList(battery));
-        Artist metallica = new Artist("Metallica");
-        metallica.setAlbums(Collections.singletonList(masterOfPuppets));
-        library.setArtists(Collections.singletonList(metallica));
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, Collections.singletonList(battery));
+        Artist metallica = new Artist("Metallica", Collections.singletonList(masterOfPuppets));
+        Library library = new Library(Collections.singletonList(metallica), Collections.emptyList());
+
         String serializedLibrary = ("{'artists':[{'name':'Metallica','albums':[{'titleOfAlbum':'Master of Puppets'," +
                 "'genre':'rock','firstReleaseDate':'1986-03-03','nameOfCoStars':null,'tracks':" +
                 "[{'trackTitle':'Battery','trackLength':312," +
                 "'explicitContent':false}]}]}],'playLists':[]}").replaceAll("\'", "\"");
+
 
         Assert.assertEquals(serializedLibrary, serializationService.serialize(library));
         Assert.assertEquals(library, (serializationService.deserialize(serializedLibrary, LibraryDto.class)).toDomain());

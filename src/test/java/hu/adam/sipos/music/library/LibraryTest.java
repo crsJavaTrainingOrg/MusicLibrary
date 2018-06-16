@@ -23,9 +23,6 @@ import java.util.Optional;
 import static org.hamcrest.CoreMatchers.is;
 
 public class LibraryTest {
-    private Library library = new Library();
-    private Artist metallica;
-    private List<Artist> myArtists;
     private final Path libraryStorePath;
     private final Path artistsInputFilePath;
     private LibraryFileRepository libraryFileRepository;
@@ -40,21 +37,16 @@ public class LibraryTest {
 
     @Before
     public void setUp() {
-        Library library = new Library();
 
-        Track battery = new Track("Battery", "05:12", false);
-        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null);
-        masterOfPuppets.setTracks(Collections.singletonList(battery));
-        Artist metallica = new Artist("Metallica");
-        metallica.setAlbums(Collections.singletonList(masterOfPuppets));
-        library.setArtists(Collections.singletonList(metallica));
+        List<Track> tracks = Collections.singletonList(new Track("Battery", "05:12", false));
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, tracks);
+        Artist metallica = new Artist("Metallica", Collections.singletonList(masterOfPuppets));
+        Library library = new Library(Collections.singletonList(metallica), Collections.emptyList());
 
-        this.metallica = metallica;
 
         LibraryFileRepository libraryFileRepository = new LibraryFileRepository(libraryStorePath, new JsonSerializationService());
         libraryFileRepository.save(library);
 
-        myArtists = new ArrayList<>();
     }
 
     @After
@@ -64,33 +56,20 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldCreateAnEmptyLibrary() {
-        Assert.assertNotNull(library);
-    }
-
-    @Test
-    public void newLibraryHasEmptyArtistList() {
-        List<Artist> artists = library.getArtists();
-        Assert.assertTrue(artists.isEmpty());
-    }
-
-    @Test
     public void addAnArtistToTheLibraryLibraryHasAnArtist() {
-        myArtists.add(new Artist("Metallica"));
-        library.setArtists(myArtists);
+        Library library = new Library(Collections.singletonList(new Artist("Metallica", new ArrayList<>())), Collections.emptyList());
         Assert.assertFalse(library.getArtists().isEmpty());
         Assert.assertEquals("Metallica", library.getArtists().get(0).getName());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void creatingArtistWithNullNameShouldResultIllegalArgumentException() {
-        new Artist(null);
+        new Artist(null, new ArrayList<>());
     }
 
     @Test
     public void searchingAnArtistWithCertainNameIfArtistExistsReturnArtistWithSameName() {
-        myArtists.add(metallica);
-        library.setArtists(myArtists);
+        Library library = new Library(Collections.singletonList(new Artist("Metallica", new ArrayList<>())), Collections.emptyList());
 
         Optional<Artist> metallicaOptional = library.searchArtist("Metallica");
         Assert.assertTrue(metallicaOptional.isPresent());
@@ -99,11 +78,10 @@ public class LibraryTest {
 
     @Test
     public void searchingAnAlbumWithCertainTitleIfAlbumExistsReturnAlbumWithSameTitle() {
-        myArtists.add(metallica);
-        library.setArtists(myArtists);
-        List<Album> metallicaAlbums = new ArrayList<>();
-        metallicaAlbums.add(new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null));
-        metallica.setAlbums(metallicaAlbums);
+        List<Album> metallicaAlbums = Collections.singletonList(new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, new ArrayList<>()));
+        Artist metallica = new Artist("Metallica", metallicaAlbums);
+
+        Library library = new Library(Collections.singletonList(metallica), Collections.emptyList());
         List<Album> masterOfPuppets = library.searchAlbumByTitle("Master of Puppets");
         Assert.assertEquals(1,  masterOfPuppets.size());
         Assert.assertEquals("Master of Puppets", masterOfPuppets.get(0).getTitleOfAlbum());
@@ -111,20 +89,17 @@ public class LibraryTest {
 
     @Test
     public void shouldSurviveEmptyLibraryAdd() {
-        Library library = new Library();
+        Library library = new Library(Collections.emptyList(), Collections.emptyList());
         Library extendedLibrary = library.addOrOverride(null);
         Assert.assertEquals(library, extendedLibrary);
     }
 
     @Test
     public void shouldSurviveNullArtistAdd() {
-        Library library = new Library();
         Track battery = new Track("Battery", "05:12", false);
-        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null);
-        masterOfPuppets.setTracks(Collections.singletonList(battery));
-        Artist metallica = new Artist("Metallica");
-        metallica.setAlbums(Collections.singletonList(masterOfPuppets));
-        library.setArtists(Collections.singletonList(metallica));
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, Collections.singletonList(battery));
+        Artist metallica = new Artist("Metallica", Collections.singletonList(masterOfPuppets));
+        Library library = new Library(Collections.singletonList(metallica), Collections.emptyList());
 
         Library extendedLibrary = library.addOrOverride(null);
         Assert.assertEquals(library, extendedLibrary);
@@ -133,36 +108,28 @@ public class LibraryTest {
     @Test
     @SuppressWarnings("Duplicates")
     public void shouldAddArtistToALibraryFromAFileIfNotExists() {
-        Library library = new Library();
-
         Track battery = new Track("Battery", "05:12", false);
-        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null);
-        masterOfPuppets.setTracks(Collections.singletonList(battery));
-        Artist metallica = new Artist("Metallica");
-        metallica.setAlbums(Collections.singletonList(masterOfPuppets));
-        library.setArtists(Collections.singletonList(metallica));
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, Collections.singletonList(battery));
+        Artist metallica = new Artist("Metallica", Collections.singletonList(masterOfPuppets));
 
+        Library library = new Library(Collections.singletonList(metallica), Collections.emptyList());
 
         LibraryFileRepository libraryFileRepository = new LibraryFileRepository(libraryStorePath, new JsonSerializationService());
         libraryFileRepository.save(library);
 
-
         Library loadedLibrary = libraryFileRepository.load();
 
         Track aqualung = new Track("Aqualung", "06:38", false);
-        Album aqualungAlbum = new Album("Aqualung", "rock", LocalDate.of(1971, 3, 19), null);
-        aqualungAlbum.setTracks(Collections.singletonList(aqualung));
-        Artist jethroTull = new Artist("Jethro Tull");
-        jethroTull.setAlbums(Collections.singletonList(aqualungAlbum));
+        List<Track> tracks = Collections.singletonList(aqualung);
+        Album aqualungAlbum = new Album("Aqualung", "rock", LocalDate.of(1971, 3, 19), null, tracks);
+        Artist jethroTull = new Artist("Jethro Tull", Collections.singletonList(aqualungAlbum));
         artistFileRepository.save(jethroTull);
 
         Artist loadedArtist = artistFileRepository.load();
 
         Library extendedLibrary = loadedLibrary.addOrOverride(loadedArtist);
 
-
-        Library expectedLibrary = new Library();
-        expectedLibrary.setArtists(Arrays.asList(metallica, jethroTull));
+        Library expectedLibrary = new Library(Arrays.asList(metallica, jethroTull), Collections.emptyList());
 
         Assert.assertThat(expectedLibrary, is(extendedLibrary));
     }
@@ -170,31 +137,24 @@ public class LibraryTest {
     @Test
     @SuppressWarnings("Duplicates")
     public void shouldOverrideArtistInALibraryFromAFileIfExists() {
-        Library library = new Library();
-
         Track battery = new Track("Battery", "05:12", false);
-        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null);
-        masterOfPuppets.setTracks(Collections.singletonList(battery));
-        Artist metallica = new Artist("Metallica");
-        metallica.setAlbums(Collections.singletonList(masterOfPuppets));
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, Collections.singletonList(battery));
+        Artist metallica = new Artist("Metallica", Collections.singletonList(masterOfPuppets));
 
         Track aqualung = new Track("Aqualung", "06:38", false);
-        Album aqualungAlbum = new Album("Aqualung", "rock", LocalDate.of(1971, 3, 19), null);
-        aqualungAlbum.setTracks(Collections.singletonList(aqualung));
-        Artist jethroTull = new Artist("Jethro Tull");
-        jethroTull.setAlbums(Collections.singletonList(aqualungAlbum));
+        List<Track> tracks = Collections.singletonList(aqualung);
+        Album aqualungAlbum = new Album("Aqualung", "rock", LocalDate.of(1971, 3, 19), null, tracks);
+        Artist jethroTull = new Artist("Jethro Tull", Collections.singletonList(aqualungAlbum));
 
-        library.setArtists(Arrays.asList(metallica, jethroTull));
-
+        Library library = new Library(Arrays.asList(metallica, jethroTull), Collections.emptyList());
         libraryFileRepository.save(library);
 
         Library loadedLibrary = libraryFileRepository.load();
 
         Track blackened = new Track("Blackened", "06:41", false);
-        Album andJusticeForAll = new Album("...And Justice For All", "rock", LocalDate.of(1988, 8, 25), null);
-        andJusticeForAll.setTracks(Collections.singletonList(blackened));
-        Artist metallica2 = new Artist("Metallica");
-        metallica2.setAlbums(Collections.singletonList(andJusticeForAll));
+        List<Track> tracks1 = Collections.singletonList(blackened);
+        Album andJusticeForAll = new Album("...And Justice For All", "rock", LocalDate.of(1988, 8, 25), null, tracks1);
+        Artist metallica2 = new Artist("Metallica", Collections.singletonList(andJusticeForAll));
 
         artistFileRepository.save(metallica2);
 
@@ -202,8 +162,7 @@ public class LibraryTest {
 
         Library extendedLibrary = loadedLibrary.addOrOverride(loadedArtist);
 
-        Library expectedLibrary = new Library();
-        expectedLibrary.setArtists(Arrays.asList(metallica2, jethroTull));
+        Library expectedLibrary = new Library(Arrays.asList(metallica2, jethroTull), Collections.emptyList());
 
         Assert.assertThat(expectedLibrary, is(extendedLibrary));
     }

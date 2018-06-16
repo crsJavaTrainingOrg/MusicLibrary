@@ -14,15 +14,15 @@ import java.util.Optional;
 @EqualsAndHashCode
 public class Artist {
     private String name;
-    @Setter
-    private List<Album> albums = new ArrayList<>();
+    private List<Album> albums;
 
-    public Artist(String name) {
+    public Artist(String name, List<Album> albums) {
         if(name == null){
             throw new IllegalArgumentException("You must specify a name for the artist!");
         }
 
         this.name = name;
+        this.albums = albums;
     }
 
     public void deleteAlbumWithCertainName(String titleOfAlbumToDelete) {

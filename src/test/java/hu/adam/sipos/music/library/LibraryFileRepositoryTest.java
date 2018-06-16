@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 
 public class LibraryFileRepositoryTest {
 
@@ -20,19 +21,16 @@ public class LibraryFileRepositoryTest {
 
     @After
     public void tearDown() throws Exception {
-        Files.delete(Paths.get(FILE_PATH));
+        Files.deleteIfExists(Paths.get(FILE_PATH));
     }
 
     @Test
     public void shouldSaveAndLoadLibrary() {
-        Library library = new Library();
 
-        Track battery = new Track("Battery", "05:12", false);
-        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null);
-        masterOfPuppets.setTracks(Collections.singletonList(battery));
-        Artist metallica = new Artist("Metallica");
-        metallica.setAlbums(Collections.singletonList(masterOfPuppets));
-        library.setArtists(Collections.singletonList(metallica));
+        List<Track> tracks = Collections.singletonList(new Track("Battery", "05:12", false));
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, tracks);
+        Artist metallica = new Artist("Metallica", Collections.singletonList(masterOfPuppets));
+        Library library = new Library(Collections.singletonList(metallica), Collections.emptyList());
 
         Path libraryStorePath = Paths.get(FILE_PATH);
         LibraryFileRepository libraryFileRepository = new LibraryFileRepository(libraryStorePath, new JsonSerializationService());

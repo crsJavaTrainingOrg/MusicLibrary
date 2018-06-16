@@ -6,6 +6,7 @@ import hu.adam.sipos.music.playlist.Playlist;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,10 @@ import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+@Value
 public class Library {
-    public List<Artist> artists = new ArrayList<>();
-    public List<Playlist> playLists = new ArrayList<>();
+    private List<Artist> artists;
+    private List<Playlist> playLists;
 
     public Optional<Artist> searchArtist(String searchedArtist) {
         return artists.stream()
