@@ -1,21 +1,29 @@
-package hu.adam.sipos.music.domain;
+package hu.adam.sipos.music.album;
 
+
+import hu.adam.sipos.music.track.Track;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+@Getter
+@EqualsAndHashCode
 public class Album {
     private String titleOfAlbum;
     private String genre;
     private LocalDate firstReleaseDate;
     private String nameOfCoStars;
-    private List<Track> tracks = new ArrayList<>();
+    private List<Track> tracks;
 
 
-    public Album(String titleOfAlbum, String genre, LocalDate firstReleaseDate, String nameOfCoStars) {
+    public Album(String titleOfAlbum, String genre, LocalDate firstReleaseDate, String nameOfCoStars, List<Track> tracks) {
         if(titleOfAlbum == null) {
             throw new IllegalArgumentException("You must specify a title for the album!");
         }
@@ -28,30 +36,6 @@ public class Album {
             this.nameOfCoStars = nameOfCoStars;
         }
         this.firstReleaseDate = firstReleaseDate;
-
-
-    }
-    public String getTitleOfAlbum() {
-        return titleOfAlbum;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public LocalDate getFirstReleaseDate() {
-        return firstReleaseDate;
-    }
-
-    public String getNameOfCoStars() {
-        return nameOfCoStars;
-    }
-
-    public List<Track> getTracks() {
-        return tracks;
-    }
-
-    public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
     }
 
