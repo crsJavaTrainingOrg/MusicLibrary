@@ -6,13 +6,12 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 public class PlaylistTest {
     @Test
     public void addingAPlayListToTheArrayOfPlayListsArrayOfPlayListHasAnElement() {
-        Library library = new Library(Collections.emptyList(), Collections.singletonList(new Playlist("Car")));
+        Library library = new Library(List.of(), List.of(new Playlist("Car")));
         Assert.assertEquals(1, library.getPlayLists().size());
 
     }

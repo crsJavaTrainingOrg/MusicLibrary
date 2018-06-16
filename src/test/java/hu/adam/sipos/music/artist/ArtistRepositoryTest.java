@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 public class ArtistRepositoryTest {
@@ -24,9 +23,9 @@ public class ArtistRepositoryTest {
 
     @Test
     public void shouldSaveAndLoadArtist() {
-        List<Track> tracks = Collections.singletonList(new Track("Battery", "05:12", false));
+        List<Track> tracks = List.of(new Track("Battery", "05:12", false));
         Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, tracks);
-        Artist metallica = new Artist("Metallica", Collections.singletonList(masterOfPuppets));
+        Artist metallica = new Artist("Metallica", List.of(masterOfPuppets));
 
         Path artistStorePath = Paths.get(FILE_PATH);
         ArtistFileRepository artistFileRepository = new ArtistFileRepository(artistStorePath, new JsonSerializationService());

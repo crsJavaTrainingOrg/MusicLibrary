@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.Collections;
+import java.util.List;
 
 
 public class JsonSerializationServiceTest {
@@ -18,7 +18,7 @@ public class JsonSerializationServiceTest {
         SerializationService serializationService = new JsonSerializationService();
 
         String expectedResult = "{'artists':[],'playLists':[]}".replaceAll("\'", "\"");
-        Assert.assertEquals(expectedResult, serializationService.serialize(new Library(Collections.emptyList(), Collections.emptyList())));
+        Assert.assertEquals(expectedResult, serializationService.serialize(new Library(List.of(), List.of())));
     }
 
     @Test
@@ -26,9 +26,9 @@ public class JsonSerializationServiceTest {
         SerializationService serializationService = new JsonSerializationService();
 
         Track battery = new Track("Battery", "05:12", false);
-        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, Collections.singletonList(battery));
-        Artist metallica = new Artist("Metallica", Collections.singletonList(masterOfPuppets));
-        Library library = new Library(Collections.singletonList(metallica), Collections.emptyList());
+        Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, List.of(battery));
+        Artist metallica = new Artist("Metallica", List.of(masterOfPuppets));
+        Library library = new Library(List.of(metallica), List.of());
 
         String serializedLibrary = ("{'artists':[{'name':'Metallica','albums':[{'titleOfAlbum':'Master of Puppets'," +
                 "'genre':'rock','firstReleaseDate':'1986-03-03','nameOfCoStars':null,'tracks':" +

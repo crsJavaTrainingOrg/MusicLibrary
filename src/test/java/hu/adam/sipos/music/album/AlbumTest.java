@@ -6,14 +6,13 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class AlbumTest {
     @Test
     public void addingATrackToTrackListAlbumHasTrackInTrackList() {
-        List<Track> tracks = Collections.singletonList(new Track("Battery", "05:12", false));
+        List<Track> tracks = List.of(new Track("Battery", "05:12", false));
         Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, tracks);
         Assert.assertFalse(masterOfPuppets.getTracks().isEmpty());
         Assert.assertEquals("Battery",masterOfPuppets.getTracks().get(0).getTrackTitle());
@@ -35,7 +34,7 @@ public class AlbumTest {
 
     @Test
     public void searchingForATrackWithACertainTitleReturnsTheSearchedTrack() {
-        List<Track> tracks = Collections.singletonList(new Track("Battery",312,false));
+        List<Track> tracks = List.of(new Track("Battery",312,false));
         Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, tracks);
 
         Optional<Track> batteryOptional = masterOfPuppets.searchTracks("Battery");
@@ -45,7 +44,7 @@ public class AlbumTest {
 
     @Test
     public void searchingForATrackWithLambdaTrackTitleReturnsTheSearchedTrack() {
-        List <Track> tracks = Collections.singletonList(new Track("Battery",312,false));
+        List <Track> tracks = List.of(new Track("Battery",312,false));
         Album masterOfPuppets = new Album("Master of Puppets", "rock", LocalDate.of(1986, 3, 3), null, tracks);
         Optional<Track> batteryOptional = masterOfPuppets.searchTracks(track -> track.getTrackTitle().equals("Battery"));
         Assert.assertTrue(batteryOptional.isPresent());
