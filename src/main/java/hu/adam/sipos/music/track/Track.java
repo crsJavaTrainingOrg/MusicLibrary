@@ -1,17 +1,14 @@
 package hu.adam.sipos.music.track;
 
-import java.util.Objects;
+import lombok.RequiredArgsConstructor;
+import lombok.Value;
 
+@Value
+@RequiredArgsConstructor
 public class Track {
-    private String trackTitle;
-    private int trackLength;
-    private boolean isExplicitContent;
-
-    public Track(String trackTitle, int trackLength, boolean isExplicitContent) {
-        this.trackTitle = trackTitle;
-        this.trackLength = trackLength;
-        this.isExplicitContent = isExplicitContent;
-    }
+    private final String trackTitle;
+    private final int trackLength;
+    private final boolean isExplicitContent;
 
     public Track(String trackTitle, String trackLength, boolean isExplicitContent) {
         String[] split = trackLength.split(":");
@@ -23,32 +20,5 @@ public class Track {
 
     public String asTrackLengthString() {
         return String.format("%02d:%02d",trackLength / 60, trackLength % 60);
-    }
-
-    public String getTrackTitle() {
-        return trackTitle;
-    }
-
-    public int getTrackLength() {
-        return trackLength;
-    }
-
-    public boolean isExplicitContent() {
-        return isExplicitContent;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Track track = (Track) o;
-        return trackLength == track.trackLength &&
-                isExplicitContent == track.isExplicitContent &&
-                Objects.equals(trackTitle, track.trackTitle);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(trackTitle, trackLength, isExplicitContent);
     }
 }

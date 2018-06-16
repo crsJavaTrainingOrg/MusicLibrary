@@ -2,11 +2,13 @@ package hu.adam.sipos.music.library;
 
 import hu.adam.sipos.music.artist.ArtistDto;
 import hu.adam.sipos.music.playlist.PlaylistDto;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
 public class LibraryDto {
     public List<ArtistDto> artists = new ArrayList<>();
     public List<PlaylistDto> playLists = new ArrayList<>();

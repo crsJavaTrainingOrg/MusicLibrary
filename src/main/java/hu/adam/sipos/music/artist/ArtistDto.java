@@ -1,11 +1,13 @@
 package hu.adam.sipos.music.artist;
 
 import hu.adam.sipos.music.album.AlbumDto;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
 public class ArtistDto {
     private String name;
     private List<AlbumDto> albums = new ArrayList<>();
@@ -17,21 +19,5 @@ public class ArtistDto {
                 .collect(Collectors.toList()));
 
         return artist;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<AlbumDto> getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(List<AlbumDto> albums) {
-        this.albums = albums;
     }
 }

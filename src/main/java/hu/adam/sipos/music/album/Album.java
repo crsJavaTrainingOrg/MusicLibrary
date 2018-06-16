@@ -2,6 +2,9 @@ package hu.adam.sipos.music.album;
 
 
 import hu.adam.sipos.music.track.Track;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,11 +13,14 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+@Getter
+@EqualsAndHashCode
 public class Album {
     private String titleOfAlbum;
     private String genre;
     private LocalDate firstReleaseDate;
     private String nameOfCoStars;
+    @Setter
     private List<Track> tracks = new ArrayList<>();
 
 
@@ -33,30 +39,6 @@ public class Album {
         this.firstReleaseDate = firstReleaseDate;
     }
 
-    public String getTitleOfAlbum() {
-        return titleOfAlbum;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public LocalDate getFirstReleaseDate() {
-        return firstReleaseDate;
-    }
-
-    public String getNameOfCoStars() {
-        return nameOfCoStars;
-    }
-
-    public List<Track> getTracks() {
-        return tracks;
-    }
-
-    public void setTracks(List<Track> tracks) {
-        this.tracks = tracks;
-    }
-
     public void deleteTrack(String titleOfTrackToDelete) {
         tracks.removeIf(track->track.getTrackTitle().equals(titleOfTrackToDelete));
     }
@@ -71,22 +53,5 @@ public class Album {
         return tracks.stream()
                 .filter(predicate)
                 .findFirst();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Album album = (Album) o;
-        return Objects.equals(titleOfAlbum, album.titleOfAlbum) &&
-                Objects.equals(genre, album.genre) &&
-                Objects.equals(firstReleaseDate, album.firstReleaseDate) &&
-                Objects.equals(nameOfCoStars, album.nameOfCoStars) &&
-                Objects.equals(tracks, album.tracks);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(titleOfAlbum, genre, firstReleaseDate, nameOfCoStars, tracks);
     }
 }
